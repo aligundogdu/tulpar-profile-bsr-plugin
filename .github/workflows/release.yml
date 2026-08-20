@@ -1,0 +1,57 @@
+name: Release
+
+# Surum, etiket atarak cikar: git tag v1.0.1 && git push --tags
+# Is akisi paketi kurar, sha256'sini hesaplar ve marketplace kaydina
+# yapistirilacak girdiyi surum notlarina yazar.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Manifest surumu etiketle eslesiyor mu
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          MANIFEST_VERSION="$(python3 -c "import json;print(json.load(open('plugin.json'))['version'])")"
+          if [ "$TAG_VERSION" != "$MANIFEST_VERSION" ]; then
+            echo "Etiket $TAG_VERSION, plugin.json ise $MANIFEST_VERSION diyor." >&2
+            exit 1
+          fi
+
+      - name: Paketi olustur
+        run: zip -r plugin.zip plugin.json README.md
+
+      - name: Kayit girdisini hazirla
+        id: entry
+        run: |
+          SHA="$(sha256sum plugin.zip | cut -d' ' -f1)"
+          VERSION="${GITHUB_REF_NAME#v}"
+          URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}/plugin.zip"
+          {
+            echo 'notes<<EOF'
+            echo 'Marketplace kaydina (registry.json) eklenecek surum girdisi:'
+            echo ''
+            echo '```json'
+            echo '{'
+            echo "  \"version\": \"${VERSION}\","
+            echo "  \"url\": \"${URL}\","
+            echo "  \"sha256\": \"${SHA}\","
+            echo "  \"minTulparVersion\": \"1.0.0\""
+            echo '}'
+            echo '```'
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Surumu yayinla
+        uses: softprops/action-gh-release@v2
+        with:
+          files: plugin.zip
+          body: ${{ steps.entry.outputs.notes }}

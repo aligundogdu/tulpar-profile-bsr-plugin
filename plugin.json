@@ -1,0 +1,61 @@
+{
+  "id": "dev.bsr.profile",
+  "name": "Build Ship Repeat",
+  "version": "1.0.0",
+  "description": "Community profile fields for makers: monthly recurring revenue, active project count and shipped products.",
+  "author": {
+    "name": "Build Ship Repeat"
+  },
+  "type": "ui_extension",
+  "permissions": [
+    "profile:write"
+  ],
+  "capabilities": {
+    "profileFields": [
+      {
+        "key": "mrr",
+        "label": {
+          "tr": "Aylık gelir",
+          "en": "MRR"
+        },
+        "description": {
+          "tr": "Aylık yinelenen gelirin. Boş bırakırsan kimse görmez.",
+          "en": "Your monthly recurring revenue. Leave it empty and nobody sees it."
+        },
+        "type": "currency",
+        "currency": "USD",
+        "surfaces": ["profile-panel", "profile-hover"],
+        "icon": "trending-up",
+        "placeholder": "0"
+      },
+      {
+        "key": "active_projects",
+        "label": {
+          "tr": "Aktif proje",
+          "en": "Active projects"
+        },
+        "description": {
+          "tr": "Şu an üzerinde çalıştığın proje sayısı.",
+          "en": "How many projects you are shipping right now."
+        },
+        "type": "number",
+        "surfaces": ["profile-panel", "profile-hover"],
+        "icon": "rocket",
+        "placeholder": "0"
+      },
+      {
+        "key": "projects",
+        "label": {
+          "tr": "Projeler",
+          "en": "Projects"
+        },
+        "type": "url-list",
+        "maxItems": 5,
+        "surfaces": ["profile-panel"],
+        "icon": "globe",
+        "placeholder": "https://..."
+      }
+    ]
+  },
+  "settings": []
+}
