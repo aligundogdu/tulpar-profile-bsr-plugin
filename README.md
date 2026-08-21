@@ -13,9 +13,30 @@ görünmez, yani kimse gelirini paylaşmak zorunda değil.
 
 ## Kurulum
 
+Eklenti [Tulpar eklenti kaydında](https://github.com/Tulpar-Chat/plugins) listeli.
+
+**Arayüzden:** Yönetici ayarları → Eklentiler → Marketplace → **Kur**.
+
+**Konsoldan:**
+
 ```bash
-./bin/tulpar prod plugins:sync      # veya: php bin/console app:plugin:sync-builtin
+php bin/console app:plugin:install-remote dev.bsr.profile
 ```
+
+Aynı komut kurulu bir sürümü güncellemek için de kullanılır; ayarlar ve
+doldurulmuş alan değerleri korunur.
+
+## Sürüm çıkarmak
+
+`plugin.json` içindeki sürümü yükselt, etiketi at:
+
+```bash
+git tag v1.0.1 && git push --tags
+```
+
+İş akışı paketi kurar, `sha256`'sını hesaplar ve kayda eklenecek JSON girdisini
+sürüm notlarına yazar. O girdiyi kayıt deposundaki `registry.json` dosyasına
+ekleyip `latest` alanını güncellemek yeterli.
 
 ## Yapılandırma
 
