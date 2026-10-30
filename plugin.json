@@ -1,7 +1,7 @@
 {
   "id": "dev.bsr.profile",
   "name": "Build Ship Repeat",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Community profile fields for makers (monthly recurring revenue, active projects, shipped products) and referral invites: members ask, admins approve, the newcomer joins with a single-use link.",
   "author": {
     "name": "Build Ship Repeat"
@@ -66,7 +66,11 @@
           "profile-panel"
         ],
         "icon": "globe",
-        "placeholder": "https://..."
+        "placeholder": "https://...",
+        "linkParams": {
+          "utm_source": "buildshiprepeat",
+          "utm_medium": "profile"
+        }
       }
     ],
     "slashCommands": [
