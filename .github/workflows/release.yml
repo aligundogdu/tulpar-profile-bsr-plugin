@@ -27,7 +27,7 @@ jobs:
           fi
 
       - name: Paketi olustur
-        run: zip -r plugin.zip plugin.json README.md
+        run: zip -r plugin.zip plugin.json src README.md
 
       - name: Kayit girdisini hazirla
         id: entry
