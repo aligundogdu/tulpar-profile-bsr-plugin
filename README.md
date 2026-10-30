@@ -8,6 +8,9 @@ yayınlanmış projeler) ve referanslı davet.
 Kişi kartına üç alan ekler. Aylık gelir ve aktif proje sayısı avatara
 gelindiğinde açılan küçük kartta da görünür, projeler yalnızca tam kartta.
 
+Proje linklerine tıklayan ziyaretçi, sitesine `utm_source=buildshiprepeat&utm_medium=profile`
+ile gelir (Tulpar'ın bunu destekleyen sürümlerinde); kişinin yazdığı adres değişmez.
+
 Alanları herkes kendi profil ayarlarından doldurur. Boş bırakılan alan hiç
 görünmez, yani kimse gelirini paylaşmak zorunda değil.
 
